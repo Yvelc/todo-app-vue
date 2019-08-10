@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto px-4 py-20 flex flex-col flex-wrap">
-        <h1 class="font-hairline text-6xl text-center text-gray-500">Todo App</h1>
+        <h1 class="font-hairline text-6xl text-center text-blue-500">Todo App R&Y</h1>
         
             <todo-card class="mx-auto mt-4 h-64 w-full max-w-lg">
             
@@ -12,11 +12,18 @@
                 <div class="flex items-center"> 
                     <input type="checkbox" v-model="task.completed">
                    <div v-if="!task.editing" @dblclick="editTodo(task)">
-                       <div v-if="task.completed" class="">
-                           </div> 
-                       {{ task.title }}
-                   </div>
-                   <input v-else type="text" v-model="task.title" class="border-solid border-2 border-gray-600" @blur="doneTask(task)" @keyup.enter="doneTask(task)" v-focus @keyup.esc="cancelEdit(task)">
+                       <div v-if="task.completed" class="line-through">
+                           {{ task.title }}
+                       </div> 
+                       <div v-else>
+                           {{ task.title }}
+                       </div>
+                    </div>
+                    <div v-else>
+                        <div v-if="!task.completed">
+                            <input type="text" v-model="task.title" class="border-solid border-2 border-gray-600" @blur="doneTask(task)" @keyup.enter="doneTask(task)" v-focus @keyup.esc="cancelEdit(task)">
+                        </div>
+                    </div>
                 </div>                
                 <div class="cursor-pointer hover:text-black mt-4 text-gray-500" @click="removeTodo(index)">
                    &times;
@@ -25,9 +32,10 @@
             
         </todo-card>
 
+<!--
         <todo-card class="mx-auto mt-10 w-full max-w-lg">
             Create/Edit Task 
-        </todo-card>
+        </todo-card> -->
     </div>
 </template>
 
