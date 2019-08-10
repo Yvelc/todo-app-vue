@@ -1,15 +1,18 @@
 <template>
     <div class="container mx-auto px-4 py-20 flex flex-col flex-wrap">
-        <h1 class="font-hairline text-6xl text-center text-blue-500">Todo App R&Y </h1>
-        
+        <h1 class="font-hairline text-6xl text-center text-blue-500">Todo App R&Y</h1>
+       
             <todo-card class="mx-auto mt-4 h-64 w-full max-w-lg">
+            
             <!--input for get a task -->
             <input type="text" class="font-hairline w-full" placeholder="Enter your Task Here" v-model="newTodo" @keyup.enter="addTodo">
-            <div v-for="task in tasks" :key="task.id" class="flex content-start">
+            
+            <!--for loop to show task in web page-->
+            <div v-for="(task, index) in tasks" :key="task.id" class="flex mt-0.75 justify-between">
                 <div> 
-                    {{ task.title }}
+                    {{ task.title }} 
                 </div>                
-                <div class="object-none object-right">
+                <div class="cursor-pointer hover:text-black mt-4 text-gray-500" @click="removeTodo(index)">
                    &times;
                 </div>
             </div>
@@ -64,7 +67,11 @@ export default {
            })
         this.newTodo=''
         this.idForTodo++
-    }
+    },
+
+       removeTodo(index){
+         this.tasks.splice(index, 1)
+       }
     }
 }
 </script>
