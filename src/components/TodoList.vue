@@ -9,8 +9,11 @@
             
             <!--for loop to show task in web page-->
             <div v-for="(task, index) in tasks" :key="task.id" class="flex mt-0.75 justify-between">
-                <div class="todo-item-left"> 
-                   <div v-if="!task.editing" @dblclick="editTodo(task)" > 
+                <div class="flex items-center"> 
+                    <input type="checkbox" v-model="task.completed">
+                   <div v-if="!task.editing" @dblclick="editTodo(task)">
+                       <div v-if="task.completed" class="">
+                           </div> 
                        {{ task.title }}
                    </div>
                    <input v-else type="text" v-model="task.title" class="border-solid border-2 border-gray-600" @blur="doneTask(task)" @keyup.enter="doneTask(task)" v-focus @keyup.esc="cancelEdit(task)">
