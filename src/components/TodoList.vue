@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto px-4 py-20 flex flex-col flex-wrap">
-        <h1 class="font-hairline text-6xl text-center text-gray-500">Todo App</h1>
+        <h1 class="font-hairline text-6xl text-center text-blue-500">Todo App R&Y </h1>
         
             <todo-card class="mx-auto mt-4 h-64 w-full max-w-lg">
             <!--input for get a task -->
