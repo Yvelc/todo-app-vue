@@ -9,8 +9,11 @@
             
             <!--for loop to show task in web page-->
             <div v-for="(task, index) in tasks" :key="task.id" class="flex mt-0.75 justify-between">
-                <div> 
-                    {{ task.title }} 
+                <div class="todo-item-left"> 
+                   <div v-if="!task.editing" @dblclick="editTodo(task)" > 
+                       {{ task.title }}
+                   </div>
+                   <input v-else type="text" v-model="task.title" class="border-solid border-2 border-gray-600" @blur="doneTask(task)" @keyup.enter="doneTask(task)" v-focus @keyup.esc="cancelEdit(task)">
                 </div>                
                 <div class="cursor-pointer hover:text-black mt-4 text-gray-500" @click="removeTodo(index)">
                    &times;
@@ -35,19 +38,32 @@ export default {
         return {
             newTodo: '', 
             idForTodo: 3,
+            beforeEditCache: '',
             tasks: [
                 {
                     id: 1,
                     title: 'Acividad 1 ',
-                    done: false
+                    done: false,
+                    editing: false
                 },
                 {
                     id: 2,
                     title: 'Example2 task2',
-                    done: false
+                    done: false,
+                    editing: false
                 }
             ]
         };
+    },
+
+    directives: {
+      focus: {
+
+          inserted: function (el) {
+              el.focus
+          }
+      }
+
     },
 
     mounted () {
@@ -67,6 +83,23 @@ export default {
            })
         this.newTodo=''
         this.idForTodo++
+    },
+
+    editTodo(task){
+       this.beforeEditCache = task.title
+       task.editing = true
+
+    },
+    doneTask(task){
+        task.editing = false
+        if(task.title.trim() == ''){
+               task.title = this.beforeEditCache
+           }
+    },
+
+    cancelEdit(task){
+         task.title = this.beforeEditCache
+         task.editing = false 
     },
 
        removeTodo(index){
