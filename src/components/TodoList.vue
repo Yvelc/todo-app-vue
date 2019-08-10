@@ -23,6 +23,9 @@
                         <div v-if="!task.completed">
                             <input type="text" v-model="task.title" class="border-solid border-2 border-gray-600" @blur="doneTask(task)" @keyup.enter="doneTask(task)" v-focus @keyup.esc="cancelEdit(task)">
                         </div>
+                        <div v-else>
+                           {{ task.title = this.beforeEditCache}}
+                       </div>
                     </div>
                 </div>                
                 <div class="cursor-pointer hover:text-black mt-4 text-gray-500" @click="removeTodo(index)">
@@ -53,13 +56,13 @@ export default {
             tasks: [
                 {
                     id: 1,
-                    title: 'Acividad 1 ',
+                    title: 'Actividad 1',
                     done: false,
                     editing: false
                 },
                 {
                     id: 2,
-                    title: 'Example2 task2',
+                    title: 'Actividad 2',
                     done: false,
                     editing: false
                 }
